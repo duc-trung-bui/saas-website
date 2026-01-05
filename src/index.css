@@ -28,9 +28,17 @@
   .delay-100 {
     animation-delay: 100ms;
   }
+
+  .delay-200 {
+    animation-delay: 200ms;
+  }
+
+  .delay-300 {
+    animation-delay: 300ms;
+  }
 }
 
-@keyframes slideInFromBottom{
+@keyframes slideInFromBottom {
   from {
     opacity: 0;
     transform: translateY(1rem);
