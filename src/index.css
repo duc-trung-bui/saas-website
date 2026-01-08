@@ -61,3 +61,66 @@
     transform: translateY(0);
   }
 }
+
+@keyframes glowTransition {
+  0%, 100% { 
+    border-color: #dce6f9;
+  }
+  50% { 
+    border-color: #b4cfed;
+  }
+}
+
+.animate-glow-ring {
+  animation: glowTransition 6s ease-in-out infinite;
+}
+
+/* Rainbow Glow Effect */
+
+@keyframes rotate-gradient {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-rainbow-glow {
+  /* Strictly saturated colors - no pale yellows or whites */
+  background: conic-gradient(
+    from 0deg,
+    #ff0000, 
+    #d500ff, 
+    #0033ff, 
+    #00f2ff, 
+    #00ff22, 
+    #ffcc00, 
+    #ff0000
+  );
+  /* Dimensions optimized to cover sharp corners during rotation */
+  width: 200%;
+  height: 200%;
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  
+  animation: rotate-gradient 0.9s linear infinite;
+  /* Minimal blur to keep the border crisp but glowing */
+  filter: blur(3px);
+}
+
+/* Liquid Float Animation */
+
+@keyframes liquid-float {
+  0%, 100% {
+    transform: translateY(-4px);
+  }
+  50% {
+    transform: translateY(4px);
+  }
+}
+
+.animate-liquid-float {
+  animation: liquid-float 2.2s ease-in-out infinite;
+}

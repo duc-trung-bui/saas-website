@@ -4,47 +4,45 @@ const plans = [
   {
     name: "Starter",
     price: "29.99",
-    description: "Perfect for individuals and small teams",
+    description: "Perfect for individuals and hobbyists",
     features: [
-      "Up to 5 team members",
-      "10GB storage",
-      "Basic analytics",
+      "50 AI Generations / mo",
+      "Standard Resolution",
+      "Basic Style Library",
       "Email support",
-      "API access",
-      "Mobile app",
+      "Personal Use License",
+      "Mobile access",
     ],
     mostPopular: false,
   },
   {
     name: "Professional",
     price: "79.99",
-    description: "Best for growing businesses",
+    description: "Best for creators and influencers",
     features: [
-      "Up to 25 team members",
-      "100GB storage",
-      "Advanced analytics",
-      "Priority support",
-      "API access",
-      "Mobile app",
-      "Custom integrations",
-      "Advanced security",
+      "Unlimited Generations",
+      "4K Ultra-HD Resolution",
+      "Advanced Style Consistency",
+      "Priority Rendering",
+      "Commercial License",
+      "Custom Style Training",
+      "Background Removal",
+      "Priority Support",
     ],
     mostPopular: true,
   },
   {
     name: "Enterprise",
     price: "199.99",
-    description: "For large organizations",
+    description: "For studios and large teams",
     features: [
-      "Unlimited team members",
-      "Unlimited storage",
-      "Enterprise analytics",
-      "24/7 phone support",
-      "API access",
-      "Mobile app",
-      "Custom integrations",
-      "Advanced security",
-      "Dedicated account manager",
+      "Everything in Professional",
+      "API Access for Apps",
+      "Custom Model Fine-tuning",
+      "Dedicated GPU Servers",
+      "Team Collaboration Tools",
+      "Advanced security & SSO",
+      "Dedicated Account Manager",
       "Custom SLA",
     ],
     mostPopular: false,
@@ -55,38 +53,36 @@ export default function Pricing() {
   return (
     <section
       id="pricing"
-      className="py-16 sm:py-20 px-10 sm:px-6 lg:px-8 relative bg-slate-950 text-white"
+      className="py-24 sm:py-32 px-6 lg:px-8 relative bg-slate-50 text-slate-900"
     >
       <div className="max-w-7xl mx-auto">
         {/* Section Header */}
-        <div className="text-center mb-12 sm:mb-16 lg:mb-20">
-          <h2 className="text-5xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 sm:mb-6">
-            <span className="bg-linear-to-b from-white to-gray-300 bg-clip-text text-transparent">
-              Simple, Transparent
-            </span>
+        <div className="text-center mb-16 lg:mb-24">
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight mb-6">
+            <span className="text-slate-900">Simple, Transparent</span>
             <br />
-            <span className="bg-linear-to-b from-blue-400 to-cyan-400 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
               Pricing Plans
             </span>
           </h2>
-          <p className="text-gray-400 text-xl sm:text-lg max-w-2xl mx-auto">
-            Choose the perfect plan for your needs. All plans include a 14-day
+          <p className="text-slate-600 text-lg md:text-xl max-w-2xl mx-auto font-medium">
+            Choose the perfect plan for your digital identity. All plans include a 14-day
             free trial.
           </p>
         </div>
 
         {/* Pricing Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 items-stretch">
           {plans.map((plan, key) => (
             <div
               key={key}
-              className={`relative group flex flex-col h-full transition-all duration-300 
-                ${plan.mostPopular ? "lg:scale-105 z-10" : "z-0"}`}
+              className={`relative group flex flex-col h-full transition-all duration-500 
+                ${plan.mostPopular ? "lg:scale-105 z-10" : "z-0 hover:-translate-y-2"}`}
             >
               {/* MOST POPULAR BADGE */}
               {plan.mostPopular && (
-                <div className="absolute -top-3 left-1/2 transform -translate-x-1/2 z-30">
-                  <div className="flex items-center space-x-1 px-4 py-1.5 bg-linear-to-b from-blue-500 to-cyan-500 rounded-full text-sm font-semibold shadow-[0_0_20px_rgba(59,130,246,0.5)]">
+                <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 z-30">
+                  <div className="flex items-center space-x-1.5 px-4 py-1.5 bg-blue-600 rounded-full text-sm font-bold text-white shadow-xl shadow-blue-600/30">
                     <Star className="w-3.5 h-3.5 fill-white" />
                     <span>Most Popular</span>
                   </div>
@@ -96,41 +92,37 @@ export default function Pricing() {
               {/* INNER WRAPPER */}
               <div
                 className={`
-                  relative flex-1 flex flex-col p-6 sm:p-8 rounded-2xl border backdrop-blur-sm overflow-hidden transition-colors duration-300
-                  ${plan.mostPopular 
-                    ? "border-blue-500 bg-slate-900/80 shadow-2xl shadow-blue-500/10" 
-                    : "border-slate-800 bg-slate-900/50 hover:border-slate-700"}
+                  relative flex-1 flex flex-col p-8 rounded-[2.5rem] border transition-all duration-300
+                  ${plan.mostPopular
+                    ? "border-blue-200 bg-white shadow-[0_30px_60px_-15px_rgba(0,0,0,0.1)]"
+                    : "border-slate-200 bg-white/50 hover:bg-white shadow-sm hover:shadow-xl hover:shadow-slate-200/50"}
                 `}
               >
-                {/* THE OVERLAY: Now safely trapped inside overflow-hidden */}
-                <div className="absolute inset-0 bg-linear-to-br from-white/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-all duration-700 transform -translate-x-full -translate-y-full group-hover:translate-x-0 group-hover:translate-y-0 pointer-events-none" />
-
-                {/* Card Content Wrapper: Relative Z-index ensures text stays above overlay */}
                 <div className="relative z-10 flex flex-col h-full">
                   <div className="text-center mb-8">
-                    <h3 className="text-xl sm:text-2xl font-bold mb-2">{plan.name}</h3>
-                    <p className="text-gray-400 text-xs sm:text-sm mb-4">
+                    <h3 className="text-2xl font-bold text-slate-900 mb-2">{plan.name}</h3>
+                    <p className="text-slate-500 text-sm font-medium mb-6">
                       {plan.description}
                     </p>
                     <div className="flex items-baseline justify-center">
-                      <span className="text-3xl sm:text-4xl lg:text-5xl font-bold bg-linear-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">
+                      <span className="text-4xl sm:text-5xl font-extrabold text-slate-900">
                         ${plan.price}
                       </span>
-                      <span className="text-gray-400 ml-2 text-sm sm:text-base">/month</span>
+                      <span className="text-slate-400 ml-2 text-base font-medium">/mo</span>
                     </div>
                   </div>
 
                   {/* Features List */}
-                  <ul className="space-y-4 mb-8 grow">
+                  <ul className="space-y-4 mb-10 grow">
                     {plan.features.map((feature, featureKey) => (
                       <li
                         key={featureKey}
                         className="flex items-start space-x-3"
                       >
-                        <div className="shrink-0 w-5 h-5 rounded-full bg-blue-500/20 flex items-center justify-center mt-0.5">
-                          <Check className="w-3 h-3 text-blue-400" />
+                        <div className="shrink-0 w-5 h-5 rounded-full bg-blue-50 flex items-center justify-center mt-0.5">
+                          <Check className="w-3 h-3 text-blue-600 stroke-[3px]" />
                         </div>
-                        <span className="text-gray-300 text-sm sm:text-base">
+                        <span className="text-slate-600 text-sm sm:text-base font-medium">
                           {feature}
                         </span>
                       </li>
@@ -139,11 +131,10 @@ export default function Pricing() {
 
                   {/* CTA Button */}
                   <button
-                    className={`w-full py-3 px-6 rounded-lg font-semibold transition-all duration-300 mt-auto hover:scale-[1.02] active:scale-[0.98] cursor-pointer text-sm sm:text-base ${
-                      plan.mostPopular
-                        ? "bg-linear-to-b from-blue-500 to-cyan-500 shadow-lg shadow-blue-500/20"
-                        : "bg-white/5 border border-white/10 hover:bg-white/10"
-                    }`}
+                    className={`w-full py-4 px-6 rounded-2xl font-bold transition-all duration-300 mt-auto hover:scale-[1.02] active:scale-[0.98] cursor-pointer text-base ${plan.mostPopular
+                        ? "bg-blue-600 text-white shadow-lg shadow-blue-600/25 hover:bg-blue-700"
+                        : "bg-slate-100 text-slate-900 hover:bg-slate-200"
+                      }`}
                   >
                     Get Started
                   </button>
@@ -154,11 +145,11 @@ export default function Pricing() {
         </div>
 
         {/* Footer Link */}
-        <div className="mt-12 text-center">
-          <p className="text-gray-400 text-lg">
+        <div className="mt-16 text-center">
+          <p className="text-slate-500 text-lg font-medium">
             Need a custom plan?{" "}
-            <a href="#" className="text-blue-400 hover:text-blue-300 transition-colors font-medium">
-              Contact Sales Team
+            <a href="#" className="text-blue-600 hover:text-blue-700 transition-colors font-bold decoration-2 underline-offset-4 hover:underline">
+              Contact our Sales Team
             </a>
           </p>
         </div>
