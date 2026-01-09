@@ -63,10 +63,13 @@
 }
 
 @keyframes glowTransition {
-  0%, 100% { 
+
+  0%,
+  100% {
     border-color: #dce6f9;
   }
-  50% { 
+
+  50% {
     border-color: #b4cfed;
   }
 }
@@ -81,6 +84,7 @@
   0% {
     transform: rotate(0deg);
   }
+
   100% {
     transform: rotate(360deg);
   }
@@ -88,23 +92,21 @@
 
 .animate-rainbow-glow {
   /* Strictly saturated colors - no pale yellows or whites */
-  background: conic-gradient(
-    from 0deg,
-    #ff0000, 
-    #d500ff, 
-    #0033ff, 
-    #00f2ff, 
-    #00ff22, 
-    #ffcc00, 
-    #ff0000
-  );
+  background: conic-gradient(from 0deg,
+      #ff0000,
+      #d500ff,
+      #0033ff,
+      #00f2ff,
+      #00ff22,
+      #ffcc00,
+      #ff0000);
   /* Dimensions optimized to cover sharp corners during rotation */
   width: 200%;
   height: 200%;
   position: absolute;
   top: -50%;
   left: -50%;
-  
+
   animation: rotate-gradient 0.9s linear infinite;
   /* Minimal blur to keep the border crisp but glowing */
   filter: blur(3px);
@@ -113,9 +115,12 @@
 /* Liquid Float Animation */
 
 @keyframes liquid-float {
-  0%, 100% {
+
+  0%,
+  100% {
     transform: translateY(-4px);
   }
+
   50% {
     transform: translateY(4px);
   }
@@ -123,4 +128,87 @@
 
 .animate-liquid-float {
   animation: liquid-float 2.2s ease-in-out infinite;
+}
+
+
+/* Sutle Glow */
+
+@keyframes subtleGlow {
+  0% {
+    box-shadow:
+      0 0 10px 1px rgba(99, 102, 241, 0.15),
+      inset 0 0 8px rgba(99, 102, 241, 0.05);
+    border-color: rgba(220, 220, 220, 0.5);
+    /* indigo-200/50 */
+  }
+
+  50% {
+    box-shadow:
+      0 0 16px 4px rgba(99, 102, 241, 0.3),
+      inset 0 0 12px rgba(99, 102, 241, 0.1);
+    border-color: rgb(204, 213, 255);
+    /* indigo-300 */
+  }
+
+  100% {
+    box-shadow:
+      0 0 10px 1px rgba(99, 102, 241, 0.15),
+      inset 0 0 8px rgba(99, 102, 241, 0.05);
+    border-color: rgba(221, 228, 255, 0.5);
+  }
+}
+
+.animate-glow {
+  animation: subtleGlow 1.8s cubic-bezier(0.5, 0.4, 0.5, 0.7) infinite;
+  will-change: box-shadow, border-color;
+}
+
+
+/* Gradient Background */
+.bg-brand-gradient {
+  background: linear-gradient(to right, #3c74ec, #2859fd);
+}
+
+.bg-brand-gradient:hover {
+  background: linear-gradient(to right, #1d4ed8, #383ef5);
+}
+
+
+/* Card Sliding */
+
+.testimonial-card {
+  background-color: #ffffff !important;
+  will-change: transform;
+  backface-visibility: hidden;
+  isolation: isolate;
+  contain: paint layout;
+  transition: transform 0.9s cubic-bezier(0.2, 0.8, 0.2, 1);
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
+.isOffstage {
+  pointer-events: none;
+  visibility: hidden;
+}
+
+.card-dim-overlay {
+  background: rgba(255, 255, 255, 0);
+  transition: background 0.9s ease;
+  z-index: 10;
+}
+
+/* Side cards look faded */
+.isSide .card-dim-overlay {
+  background: rgba(255, 255, 255, 0.55);
+}
+
+/* Offstage cards are fully dimmed */
+.isOffstage .card-dim-overlay {
+  background: rgba(255, 255, 255, 0.85);
+}
+
+.isSide,
+.isOffstage {
+  pointer-events: none;
 }

@@ -45,11 +45,11 @@ export default function Hero() {
             </p>
 
             <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
-              <button className="w-full sm:w-auto px-8 py-4 bg-blue-600 rounded-2xl font-bold text-white flex items-center justify-center gap-2 hover:bg-blue-700 transition-all shadow-xl shadow-blue-600/25 active:scale-95">
+              <button className="w-full sm:w-auto px-8 py-4 bg-blue-600 rounded-lg font-bold text-white flex items-center justify-center gap-2 hover:bg-blue-700 transition-all shadow-xl shadow-blue-600/25 active:scale-95">
                 Start Creating <ArrowRight className="w-5 h-5" />
               </button>
 
-              <button className="group w-full sm:w-auto px-8 py-4 bg-white border border-slate-200 rounded-2xl font-bold text-slate-700 flex items-center justify-center gap-3 hover:bg-slate-50 transition-all shadow-sm">
+              <button className="group w-full sm:w-auto px-8 py-4 bg-white border border-slate-200 rounded-lg font-bold text-slate-700 flex items-center justify-center gap-3 hover:bg-slate-50 transition-all shadow-sm">
                 <div className="p-2 bg-blue-50 rounded-full group-hover:bg-blue-100 transition-colors">
                   <Play className="w-4 h-4 fill-blue-600 text-blue-600" />
                 </div>
