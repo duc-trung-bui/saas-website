@@ -1,4 +1,4 @@
-import { ArrowLeft, ArrowRight, Quote } from "lucide-react";
+import { ChevronLeft, ChevronRight, Quote } from "lucide-react";
 import { useState } from "react";
 
 const testimonials = [
@@ -147,8 +147,8 @@ export default function Testimonials() {
         {/* Controls */}
         <div className="flex flex-col items-center gap-10">
           <div className="flex items-center gap-8">
-            <button onClick={goToPrevious} className="p-4 bg-white rounded-full shadow-md border border-slate-100 text-slate-400 hover:text-blue-600 transition-all active:scale-90">
-              <ArrowLeft className="w-6 h-6" />
+            <button onClick={goToPrevious} className="p-4 bg-white rounded-full border border-gray-100 text-slate-400 hover:text-blue-600 transition-all active:scale-90">
+              <ChevronLeft className="w-6 h-6" />
             </button>
 
             <div className="flex items-center gap-2.5">
@@ -162,8 +162,8 @@ export default function Testimonials() {
               ))}
             </div>
 
-            <button onClick={goToNext} className="p-4 bg-white rounded-full shadow-md border border-slate-100 text-slate-400 hover:text-blue-600 transition-all active:scale-90">
-              <ArrowRight className="w-6 h-6" />
+            <button onClick={goToNext} className="p-4 bg-white rounded-full border border-gray-100 text-slate-400 hover:text-blue-600 transition-all active:scale-90">
+              <ChevronRight className="w-6 h-6" />
             </button>
           </div>
         </div>

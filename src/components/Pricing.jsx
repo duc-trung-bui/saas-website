@@ -119,8 +119,8 @@ export default function Pricing() {
           {currentPlans.map((plan, key) => (
             <div
               key={`${planType}-${key}`}
-              className={`relative flex flex-col bg-white border border-slate-200 rounded-lg transition-all duration-500 
-                ${plan.mostPopular ? "lg:scale-105 z-10 animate-glow" : "shadow-sm hover:shadow-md"}`}
+              className={`relative flex flex-col bg-white rounded-lg transition-all duration-500 
+                ${plan.mostPopular ? "lg:scale-105 z-10 animate-glow" : "border border-gray-100 hover:shadow-md"}`}
             >
               {/* MOST POPULAR BADGE - Centered and slightly above */}
               {plan.mostPopular && (
