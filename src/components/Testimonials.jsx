@@ -49,9 +49,9 @@ const testimonials = [
 
 // Mock creator images for the social proof section
 const socialProofCreators = [
-  "https://images.pexels.com/photos/1239291/pexels-photo-1239291.jpeg?auto=compress&cs=tinysrgb&w=100",
-  "https://images.pexels.com/photos/91227/pexels-photo-91227.jpeg?auto=compress&cs=tinysrgb&w=100",
-  "https://images.pexels.com/photos/1036623/pexels-photo-1036623.jpeg?auto=compress&cs=tinysrgb&w=100",
+  "https://images.pexels.com/photos/1239291/pexels-photo-1239291.jpeg?auto=compress&cs=tinysrgb&w=112",
+  "https://images.pexels.com/photos/91227/pexels-photo-91227.jpeg?auto=compress&cs=tinysrgb&w=112",
+  "https://images.pexels.com/photos/1036623/pexels-photo-1036623.jpeg?auto=compress&cs=tinysrgb&w=112",
 ];
 
 export default function Testimonials() {
@@ -72,24 +72,41 @@ export default function Testimonials() {
 
         {/* JOIN THOUSANDS SECTION */}
         <div className="flex flex-col items-center justify-center text-center gap-5 animate-in fade-in slide-in-from-bottom-4 duration-1000">
-          <div className="flex -space-x-4">
+
+          {/* The -space-x-4 applies to the containers now */}
+          <div className="flex -space-x-4 isolate">
             {socialProofCreators.map((src, i) => (
-              <div key={i} className="border-2 border-white rounded-full">
-                <img
-                  src={src}
-                  className="w-14 h-14 rounded-full object-cover"
-                  alt="Active Creator"
-                />
+              <div
+                key={i}
+                className="relative w-14 h-14 rounded-full bg-white shadow-md"
+                style={{ zIndex: socialProofCreators.length + i }}
+              >
+                {/* Inner mask */}
+                <div className="absolute inset-[3px] rounded-full overflow-hidden bg-white">
+                  <img
+                    src={src}
+                    alt="Social Creator"
+                    className="w-full h-full object-cover block"
+                  />
+                </div>
               </div>
             ))}
-            <div className="w-14 h-14 mt-[1.5px] rounded-full bg-blue-500 flex items-center justify-center border-2 border-white text-white text-xs font-bold shadow-md">
-              +5k
+
+            {/* +5k badge */}
+            <div className="relative z-20">
+              <div className="w-14 h-14 rounded-full">
+                <div className="w-full h-full rounded-full bg-blue-500 flex items-center justify-center text-white text-xs font-bold">
+                  +5k
+                </div>
+              </div>
             </div>
           </div>
 
           <div className="max-w-xl">
             <p className="text-blue-900 font-bold text-xl md:text-2xl mb-2">
-              <span className="bg-gradient-to-r from-blue-500 to-blue-400 bg-clip-text text-transparent">Join a global community of 5,000+ creators</span>
+              <span className="bg-gradient-to-r from-blue-500 to-blue-400 bg-clip-text text-transparent">
+                Join a global community of 5,000+ creators
+              </span>
             </p>
           </div>
         </div>
@@ -102,7 +119,7 @@ export default function Testimonials() {
             if (position > Math.floor(testimonials.length / 2)) position -= testimonials.length;
 
             const isActive = position === 0;
-            const isVisible = Math.abs(position) <= 1; // Only Left, Center, Right
+            const isVisible = Math.abs(position) <= 1;
 
             return (
               <div
@@ -145,19 +162,24 @@ export default function Testimonials() {
         </div>
 
         {/* Controls */}
-        <div className="flex flex-col items-center gap-10">
+        <div className="flex flex-col items-center gap-10 testimonial-controls-container">
           <div className="flex items-center gap-8">
             <button onClick={goToPrevious} className="p-4 bg-white rounded-full border border-gray-100 text-slate-400 hover:text-blue-600 transition-all active:scale-90">
               <ChevronLeft className="w-6 h-6" />
             </button>
 
-            <div className="flex items-center gap-2.5">
+            {/* Pagination Dots */}
+            <div className="flex items-center gap-3">
               {testimonials.map((_, i) => (
                 <button
                   key={i}
                   onClick={() => setActiveIndex(i)}
-                  className={`h-2.5 rounded-full transition-all duration-500 ${i === activeIndex ? "w-12 bg-blue-600" : "w-2.5 bg-slate-200"
+                  className={`h-2.5 rounded-full transition-all duration-300 cursor-pointer outline-none
+                    ${i === activeIndex
+                      ? "w-12 bg-blue-600 cursor-default"
+                      : "w-2.5 bg-slate-200 hover:bg-slate-400"
                     }`}
+                  aria-label={`Go to testimonial ${i + 1}`}
                 />
               ))}
             </div>

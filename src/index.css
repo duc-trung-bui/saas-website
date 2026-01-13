@@ -1,5 +1,14 @@
 @import "tailwindcss";
 
+
+* {
+  -webkit-font-smoothing: antialiased;
+}
+
+button {
+  cursor: pointer;
+}
+
 @layer utilities {
   .animate-in {
     animation-fill-mode: both;
@@ -36,7 +45,24 @@
   .delay-300 {
     animation-delay: 300ms;
   }
+
+  .animate-hero-slide-up {
+    animation: heroSlideUp 1.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  }
+
+  .animate-hero-slide-right {
+    animation: heroSlideRight 2s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  }
+
+  .fill-mode-both {
+    animation-fill-mode: both;
+  }
+
+  .fill-mode-forwards {
+    animation-fill-mode: forwards;
+  }
 }
+
 
 @keyframes slideInFromBottom {
   from {
@@ -78,6 +104,37 @@
   animation: glowTransition 6s ease-in-out infinite;
 }
 
+@keyframes heroSlideRight {
+  0% {
+    opacity: 0;
+    transform: translateX(80px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes heroSlideUp {
+  0% {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-hero-slide-right {
+  animation: heroSlideRight 2s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  /* FORCE THE IMAGE TO STAY IN COMPOSITOR MODE */
+  will-change: transform;
+  transform: translateZ(0);
+}
+
 /* Rainbow Glow Effect */
 
 @keyframes rotate-gradient {
@@ -112,49 +169,26 @@
   filter: blur(3px);
 }
 
-/* Liquid Float Animation */
-
-@keyframes liquid-float {
-
-  0%,
-  100% {
-    transform: translateY(-4px);
-  }
-
-  50% {
-    transform: translateY(4px);
-  }
-}
-
-.animate-liquid-float {
-  animation: liquid-float 2.2s ease-in-out infinite;
-}
-
 
 /* Sutle Glow */
 
 @keyframes subtleGlow {
   0% {
-    box-shadow:
-      0 0 2px 3px rgba(182, 217, 255, 0.15),
-      inset 0 0 2px rgba(151, 196, 255, 0.05);
+    box-shadow: 0 0 2px 3px rgba(182, 217, 255, 0.15), inset 0 0 2px rgba(151, 196, 255, 0.05);
   }
 
   50% {
-    box-shadow:
-      0 0 2px 4px rgba(161, 186, 255, 0.3),
-      inset 0 0 2px rgba(149, 187, 254, 0.1);
+    box-shadow: 0 0 2px 4px rgba(161, 186, 255, 0.3), inset 0 0 2px rgba(149, 187, 254, 0.1);
   }
 
-  0% {
-    box-shadow:
-      0 0 2px 3px rgba(171, 205, 255, 0.15),
-      inset 0 0 2px rgba(151, 196, 255, 0.05);
+  100% {
+    /* Changed from 0% to 100% for smooth looping */
+    box-shadow: 0 0 2px 3px rgba(171, 205, 255, 0.15), inset 0 0 2px rgba(151, 196, 255, 0.05);
   }
 }
 
 .animate-glow {
-  animation: subtleGlow 1.8s cubic-bezier(0.3, 0.4, 0.6, 0.7) infinite;
+  animation: subtleGlow 2.4s cubic-bezier(0.1, 0.2, 0.2, 0.7) infinite;
   will-change: box-shadow, border-color;
 }
 
@@ -187,11 +221,16 @@
   background-color: #ffffff !important;
   will-change: transform;
   backface-visibility: hidden;
-  isolation: isolate;
-  contain: paint layout;
   transition: transform 0.9s cubic-bezier(0.2, 0.8, 0.2, 1);
   transform-style: preserve-3d;
   will-change: transform;
+  z-index: 20;
+}
+
+.testimonial-controls-container {
+  position: relative;
+  z-index: 50;
+  pointer-events: auto !important;
 }
 
 .isOffstage {
@@ -218,4 +257,33 @@
 .isSide,
 .isOffstage {
   pointer-events: none;
+}
+
+
+/* Nav Links Hover Effect */
+
+.nav-link {
+  position: relative;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  bottom: -4px;
+  left: 0;
+  background-color: #2563eb;
+  transform: scaleX(0);
+  opacity: 0;
+  transform-origin: center;
+  transition: opacity 0.2s ease-out, transform 0.2s ease-out;
+}
+
+.nav-link:hover::after {
+  opacity: 1;
+  transform: scaleX(1);
+  transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.1s ease-in;
 }

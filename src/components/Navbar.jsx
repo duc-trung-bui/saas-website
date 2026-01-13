@@ -13,7 +13,7 @@ export default function Navbar({ scrolled }) {
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-14 sm:h-16 md:h-20">
-          
+
           {/* 1. Logo Section */}
           <div className="flex items-center space-x-1 cursor-pointer shrink-0">
             <img src="/logo.png" alt="Rosentte" className="w-6 h-6 sm:w-8 sm:h-8" />
@@ -25,21 +25,21 @@ export default function Navbar({ scrolled }) {
 
           {/* 2. Desktop Navigation Links (Centered-ish) */}
           <div className="hidden md:flex items-center space-x-8">
-            <a href="#features" className="text-slate-600 hover:text-blue-600 font-medium text-sm lg:text-base transition-colors">Features</a>
-            <a href="#pricing" className="text-slate-600 hover:text-blue-600 font-medium text-sm lg:text-base transition-colors">Pricing</a>
-            <a href="#testimonials" className="text-slate-600 hover:text-blue-600 font-medium text-sm lg:text-base transition-colors">Testimonials</a>
+            <a href="#features" className="nav-link text-slate-600 hover:text-blue-600 font-medium text-sm lg:text-base transition-colors">Features</a>
+            <a href="#pricing" className="nav-link text-slate-600 hover:text-blue-600 font-medium text-sm lg:text-base transition-colors">Pricing</a>
+            <a href="#testimonials" className="nav-link text-slate-600 hover:text-blue-600 font-medium text-sm lg:text-base transition-colors">Testimonials</a>
           </div>
 
           {/* 3. Desktop Auth Buttons (Right Side) */}
           <div className="hidden md:flex items-center space-x-4">
-            <a 
-              href="#login" 
-              className="text-slate-700 hover:text-blue-600 font-medium text-sm transition-colors"
+            <a
+              href="#login"
+              className="nav-link text-slate-700 hover:text-blue-600 font-medium text-sm transition-colors"
             >
               Log in
             </a>
-            <a 
-              href="#signup" 
+            <a
+              href="#signup"
               className="px-5 py-2.5 text-sm font-bold text-white bg-blue-600 rounded-lg hover:bg-blue-700 transition-all shadow-md hover:shadow-lg active:scale-95"
             >
               Start for free
@@ -47,8 +47,8 @@ export default function Navbar({ scrolled }) {
           </div>
 
           {/* Mobile Menu Toggle */}
-          <button 
-            className="md:hidden p-2 text-slate-800 hover:text-blue-600 transition-colors" 
+          <button
+            className="md:hidden p-2 text-slate-800 hover:text-blue-600 transition-colors"
             onClick={() => setMobileMenuIsOpen((prev) => !prev)}
           >
             {mobileMenuIsOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
@@ -59,29 +59,47 @@ export default function Navbar({ scrolled }) {
       {/* Mobile Menu Dropdown */}
       {mobileMenuIsOpen && (
         <div className="md:hidden bg-white border-t border-slate-100 shadow-xl animate-in slide-in-from-top duration-300">
-          <div className="px-4 py-6 space-y-4">
-            {/* Mobile Nav Links */}
-            <div className="space-y-3">
-              <a href="#features" className="block text-slate-600 hover:text-blue-600 font-medium text-base" onClick={() => setMobileMenuIsOpen(false)}>Features</a>
-              <a href="#pricing" className="block text-slate-600 hover:text-blue-600 font-medium text-base" onClick={() => setMobileMenuIsOpen(false)}>Pricing</a>
-              <a href="#testimonials" className="block text-slate-600 hover:text-blue-600 font-medium text-base" onClick={() => setMobileMenuIsOpen(false)}>Testimonials</a>
+          <div className="px-4 py-6">
+            {/* 1. Centered Nav Links */}
+            <div className="flex flex-col items-center space-y-6">
+              <a
+                href="#features"
+                className="nav-link w-fit text-slate-600 font-medium text-lg"
+                onClick={() => setMobileMenuIsOpen(false)}
+              >
+                Features
+              </a>
+              <a
+                href="#pricing"
+                className="nav-link w-fit text-slate-600 font-medium text-lg"
+                onClick={() => setMobileMenuIsOpen(false)}
+              >
+                Pricing
+              </a>
+              <a
+                href="#testimonials"
+                className="nav-link w-fit text-slate-600 font-medium text-lg"
+                onClick={() => setMobileMenuIsOpen(false)}
+              >
+                Testimonials
+              </a>
             </div>
 
             {/* Divider */}
-            <div className="h-px bg-slate-100 my-4" />
+            <div className="h-px bg-slate-100 my-8 w-full" />
 
-            {/* Mobile Auth Buttons */}
-            <div className="flex flex-col space-y-3">
-              <a 
-                href="#login" 
-                className="w-full text-center py-2 text-slate-600 font-medium hover:text-blue-600 transition-colors"
+            {/* 2. Mobile Auth Buttons */}
+            <div className="flex flex-col space-y-4 items-center">
+              <a
+                href="#login"
+                className="nav-link w-fit py-2 text-slate-600 font-medium text-lg"
                 onClick={() => setMobileMenuIsOpen(false)}
               >
                 Log in
               </a>
-              <a 
-                href="#signup" 
-                className="w-full text-center py-3 bg-blue-600 text-white font-bold rounded-lg hover:bg-blue-700 transition-colors shadow-sm"
+              <a
+                href="#signup"
+                className="w-full max-w-xs text-center py-4 bg-blue-600 text-white font-bold rounded-xl hover:bg-blue-700 transition-colors shadow-md"
                 onClick={() => setMobileMenuIsOpen(false)}
               >
                 Start for free

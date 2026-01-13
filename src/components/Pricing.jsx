@@ -1,4 +1,4 @@
-import { Check, Building2, User, ChevronRight  } from "lucide-react";
+import { Check, Building2, User  } from "lucide-react";
 import { useState } from "react";
 
 export default function Pricing() {
@@ -148,7 +148,7 @@ export default function Pricing() {
                 <div className="pt-2 pb-8">
                   <button className="w-full py-3 rounded-lg font-bold flex items-center justify-center gap-2 transition-all active:scale-95 cursor-pointer bg-brand-gradient text-white"
                   >
-                    {plan.price === "Custom" ? "Contact Sales" : "Try Rosentte"} <ChevronRight className="w-4 h-4 mt-1" />
+                    {plan.price === "Custom" ? "Contact Sales" : "Try Rosentte"}
                   </button>
                   <p className="text-[10px] text-slate-400 text-center mt-3 font-medium uppercase tracking-wider">
                     {plan.price === "0" ? "Get started instantly" : "First month free trial"}

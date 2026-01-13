@@ -71,7 +71,7 @@ const FeatureCard = ({ item }) => (
 
       <button className="inline-flex items-center text-sm font-bold text-blue-600 group/btn mt-auto">
         Learn more
-        <ArrowRight className="ml-2 w-4 h-4 group-hover/btn:translate-x-1 transition-transform" />
+        <ArrowRight className="ml-2 mt-[2px] w-4 h-4 group-hover/btn:translate-x-1 transition-transform" />
       </button>
     </div>
   </CardWrapper>
