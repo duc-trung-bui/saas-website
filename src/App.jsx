@@ -6,6 +6,8 @@ import Testimonials from './components/Testimonials';
 import Footer from './components/Footer';
 import './App.css';
 import { useEffect, useState } from 'react';
+import Logos from './components/Logos';
+import FAQ from './components/FAQ';
 
 function App() {
 
@@ -25,9 +27,11 @@ function App() {
     <div className="min-h-screen bg-slate-50 text-white overflow-hidden">
       <Navbar scrolled={scrolled}/>
       <Hero />
+      <Logos />
       <Features />
       <Pricing />
       <Testimonials />
+      <FAQ />
       <Footer />
     </div>
   )

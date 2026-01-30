@@ -22,7 +22,13 @@ export default function Hero() {
   }, []);
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center pt-16 sm:pt-20 px-4 sm:px-6 lg:px-8 overflow-hidden bg-slate-50">
+    <section className="relative min-h-[100dvh] flex items-center justify-center bg-slate-50 pt-16 pb-12 mb-8 lg:py-0 px-4 sm:px-6 lg:px-8"
+      style={{ 
+        overflowX: 'hidden', // Forces horizontal scroll to die
+        overflowY: 'clip',   // Modern fix for vertical overflow issues in animations
+        touchAction: 'pan-y' // Optimization for mobile scrolling
+      }}
+    >
       {/* Background Glows */}
       <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-blue-200/40 blur-[120px] rounded-full pointer-events-none" />
       <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-indigo-200/40 blur-[120px] rounded-full pointer-events-none" />

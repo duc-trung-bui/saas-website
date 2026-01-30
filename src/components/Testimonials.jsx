@@ -1,5 +1,7 @@
 import { ChevronLeft, ChevronRight, Quote } from "lucide-react";
-import { useState } from "react";
+import { useState, useLayoutEffect, useRef } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 const testimonials = [
   {
@@ -57,21 +59,51 @@ const socialProofCreators = [
 export default function Testimonials() {
   const [activeIndex, setActiveIndex] = useState(0);
 
+  const containerRef = useRef(null);
+
+  useLayoutEffect(() => {
+    gsap.registerPlugin(ScrollTrigger);
+
+    const ctx = gsap.context(() => {
+      // Targets the heading, social proof, and the slider area
+      gsap.fromTo(".testimonial-reveal",
+        {
+          opacity: 0,
+          y: 20
+        },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 1.2,
+          stagger: 0.1, // Small stagger so they appear nearly at once but feel "fluid"
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: containerRef.current,
+            start: "top 80%", // Starts when section is 80% into view
+            toggleActions: "play none none none"
+          }
+        }
+      );
+    }, containerRef);
+
+    return () => ctx.revert();
+  }, []);
+
   const goToNext = () => setActiveIndex((prev) => (prev + 1) % testimonials.length);
   const goToPrevious = () => setActiveIndex((prev) => (prev - 1 + testimonials.length) % testimonials.length);
 
   return (
-    <section id="testimonials" className="py-24 px-6 relative bg-slate-50 overflow-hidden">
+    <section ref={containerRef} id="testimonials" className="py-24 mb-16 px-6 relative bg-slate-50 overflow-hidden">
       <div className="max-w-6xl mx-auto">
 
-        <div className="text-center mb-16">
+        <div className="testimonial-reveal text-center mb-16 opacity-0">
           <h2 className="text-4xl md:text-5xl font-extrabold text-slate-900 mb-6">
             What our <span className="bg-gradient-to-r from-blue-600 to-cyan-500 bg-clip-text text-transparent">creators</span> are saying
           </h2>
         </div>
 
         {/* JOIN THOUSANDS SECTION */}
-        <div className="flex flex-col items-center justify-center text-center gap-5 animate-in fade-in slide-in-from-bottom-4 duration-1000">
+        <div className="testimonial-reveal flex flex-col items-center justify-center text-center gap-5 opacity-0">
 
           {/* The -space-x-4 applies to the containers now */}
           <div className="flex -space-x-4 isolate">
@@ -112,7 +144,7 @@ export default function Testimonials() {
         </div>
         {/* TESTIMONIAL CARDS */}
 
-        <div className="relative h-[480px] flex items-center justify-center isolate">
+        <div className="testimonial-reveal relative h-[480px] flex items-center justify-center isolate opacity-0">
           {testimonials.map((testimonial, index) => {
             let position = index - activeIndex;
             if (position < -Math.floor(testimonials.length / 2)) position += testimonials.length;
@@ -162,7 +194,7 @@ export default function Testimonials() {
         </div>
 
         {/* Controls */}
-        <div className="flex flex-col items-center gap-10 testimonial-controls-container">
+        <div className="testimonial-reveal flex flex-col items-center gap-10 testimonial-controls-container opacity-0">
           <div className="flex items-center gap-8">
             <button onClick={goToPrevious} className="p-4 bg-white rounded-full border border-gray-100 text-slate-400 hover:text-blue-600 transition-all active:scale-90">
               <ChevronLeft className="w-6 h-6" />

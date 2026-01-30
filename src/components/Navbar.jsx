@@ -6,7 +6,7 @@ export default function Navbar({ scrolled }) {
 
   return (
     <nav
-      className={`fixed top-0 w-full z-50 transition-all duration-300 border-b
+      className={`fixed top-0 w-full z-100 transition-all duration-300 border-b
       ${scrolled
           ? "bg-slate-50/80 backdrop-blur-lg border-gray-200"
           : "bg-slate-50/20 backdrop-blur-sm border-transparent"}`}
@@ -28,6 +28,7 @@ export default function Navbar({ scrolled }) {
             <a href="#features" className="nav-link text-slate-600 hover:text-blue-600 font-medium text-sm lg:text-base transition-colors">Features</a>
             <a href="#pricing" className="nav-link text-slate-600 hover:text-blue-600 font-medium text-sm lg:text-base transition-colors">Pricing</a>
             <a href="#testimonials" className="nav-link text-slate-600 hover:text-blue-600 font-medium text-sm lg:text-base transition-colors">Testimonials</a>
+            <a href="#faq" className="nav-link text-slate-600 hover:text-blue-600 font-medium text-sm lg:text-base transition-colors">FAQ</a>
           </div>
 
           {/* 3. Desktop Auth Buttons (Right Side) */}
@@ -51,7 +52,7 @@ export default function Navbar({ scrolled }) {
             className="md:hidden p-2 text-slate-800 hover:text-blue-600 transition-colors"
             onClick={() => setMobileMenuIsOpen((prev) => !prev)}
           >
-            {mobileMenuIsOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            <Menu className="w-6 h-6" />
           </button>
         </div>
       </div>
@@ -60,6 +61,15 @@ export default function Navbar({ scrolled }) {
       {mobileMenuIsOpen && (
         <div className="md:hidden bg-white border-t border-slate-100 shadow-xl animate-in slide-in-from-top duration-300">
           <div className="px-4 py-6">
+            {/* Close button inside sidebar */}
+            <div className="flex justify-end mb-4">
+              <button
+                className="p-2 text-slate-800 hover:text-blue-600 transition-colors"
+                onClick={() => setMobileMenuIsOpen(false)}
+              >
+                <X className="w-6 h-6" />
+              </button>
+            </div>
             {/* 1. Centered Nav Links */}
             <div className="flex flex-col items-center space-y-6">
               <a
@@ -99,7 +109,7 @@ export default function Navbar({ scrolled }) {
               </a>
               <a
                 href="#signup"
-                className="w-full max-w-xs text-center py-4 bg-blue-600 text-white font-bold rounded-xl hover:bg-blue-700 transition-colors shadow-md"
+                className="w-full max-w-lg text-center py-4 bg-blue-600 text-white font-bold rounded-xl hover:bg-blue-700 transition-colors shadow-md"
                 onClick={() => setMobileMenuIsOpen(false)}
               >
                 Start for free
