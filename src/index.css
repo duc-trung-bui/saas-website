@@ -1,5 +1,18 @@
 @import "tailwindcss";
 
+body {
+  font-family: 'Inter', sans-serif;
+}
+
+
+* {
+  -webkit-font-smoothing: antialiased;
+}
+
+button {
+  cursor: pointer;
+}
+
 @layer utilities {
   .animate-in {
     animation-fill-mode: both;
@@ -28,9 +41,34 @@
   .delay-100 {
     animation-delay: 100ms;
   }
+
+  .delay-200 {
+    animation-delay: 200ms;
+  }
+
+  .delay-300 {
+    animation-delay: 300ms;
+  }
+
+  .animate-hero-slide-up {
+    animation: heroSlideUp 1.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  }
+
+  .animate-hero-slide-right {
+    animation: heroSlideRight 2s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  }
+
+  .fill-mode-both {
+    animation-fill-mode: both;
+  }
+
+  .fill-mode-forwards {
+    animation-fill-mode: forwards;
+  }
 }
 
-@keyframes slideInFromBottom{
+
+@keyframes slideInFromBottom {
   from {
     opacity: 0;
     transform: translateY(1rem);
@@ -52,4 +90,209 @@
     opacity: 1;
     transform: translateY(0);
   }
+}
+
+@keyframes glowTransition {
+
+  0%,
+  100% {
+    border-color: #dce6f9;
+  }
+
+  50% {
+    border-color: #b4cfed;
+  }
+}
+
+.animate-glow-ring {
+  animation: glowTransition 6s ease-in-out infinite;
+}
+
+@keyframes heroSlideRight {
+  0% {
+    opacity: 0;
+    transform: translateX(80px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes heroSlideUp {
+  0% {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-hero-slide-right {
+  animation: heroSlideRight 2s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  /* FORCE THE IMAGE TO STAY IN COMPOSITOR MODE */
+  will-change: transform;
+  transform: translateZ(0);
+}
+
+/* Rainbow Glow Effect */
+
+@keyframes rotate-gradient {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-rainbow-glow {
+  /* Strictly saturated colors - no pale yellows or whites */
+  background: conic-gradient(from 0deg,
+      #ff0000,
+      #d500ff,
+      #0033ff,
+      #00f2ff,
+      #00ff22,
+      #ffcc00,
+      #ff0000);
+  /* Dimensions optimized to cover sharp corners during rotation */
+  width: 200%;
+  height: 200%;
+  position: absolute;
+  top: -50%;
+  left: -50%;
+
+  animation: rotate-gradient 0.9s linear infinite;
+  /* Minimal blur to keep the border crisp but glowing */
+  filter: blur(3px);
+}
+
+
+/* Sutle Glow */
+
+@keyframes subtleGlow {
+  0% {
+    box-shadow: 0 0 2px 3px rgba(182, 217, 255, 0.15), inset 0 0 2px rgba(151, 196, 255, 0.05);
+  }
+
+  50% {
+    box-shadow: 0 0 2px 4px rgba(161, 186, 255, 0.3), inset 0 0 2px rgba(149, 187, 254, 0.1);
+  }
+
+  100% {
+    /* Changed from 0% to 100% for smooth looping */
+    box-shadow: 0 0 2px 3px rgba(171, 205, 255, 0.15), inset 0 0 2px rgba(151, 196, 255, 0.05);
+  }
+}
+
+.animate-glow {
+  animation: subtleGlow 2.4s cubic-bezier(0.1, 0.2, 0.2, 0.7) infinite;
+  will-change: box-shadow, border-color;
+}
+
+
+/* Gradient Background */
+.bg-brand-gradient {
+  background: linear-gradient(to right, #3c74ec, #2859fd);
+}
+
+.bg-brand-gradient:hover {
+  background: linear-gradient(to right, #1d4ed8, #383ef5);
+}
+
+
+/* Card Sliding */
+
+@media (max-width: 767px) {
+  .isSide {
+    opacity: 0 !important;
+    visibility: hidden !important;
+    pointer-events: none;
+  }
+
+  .relative.h-\[480px\] {
+    height: 420px;
+  }
+}
+
+.testimonial-card {
+  background-color: #ffffff !important;
+  will-change: transform;
+  backface-visibility: hidden;
+  transition: transform 0.9s cubic-bezier(0.2, 0.8, 0.2, 1);
+  transform-style: preserve-3d;
+  will-change: transform;
+  z-index: 20;
+}
+
+.testimonial-controls-container {
+  position: relative;
+  z-index: 50;
+  pointer-events: auto !important;
+}
+
+.isOffstage {
+  pointer-events: none;
+  visibility: hidden;
+}
+
+.card-dim-overlay {
+  background: rgba(255, 255, 255, 0);
+  transition: background 0.9s ease;
+  z-index: 10;
+}
+
+/* Side cards look faded */
+.isSide .card-dim-overlay {
+  background: rgba(255, 255, 255, 0.55);
+}
+
+/* Offstage cards are fully dimmed */
+.isOffstage .card-dim-overlay {
+  background: rgba(255, 255, 255, 0.85);
+}
+
+.isSide,
+.isOffstage {
+  pointer-events: none;
+}
+
+
+/* Nav Links Hover Effect */
+
+.nav-link {
+  position: relative;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  bottom: -4px;
+  left: 0;
+  background-color: #2563eb;
+  transform: scaleX(0);
+  opacity: 0;
+  transform-origin: center;
+  transition: opacity 0.2s ease-out, transform 0.2s ease-out;
+}
+
+.nav-link:hover::after {
+  opacity: 1;
+  transform: scaleX(1);
+  transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.1s ease-in;
+}
+
+
+.feature-card-content {
+  will-change: transform;
 }

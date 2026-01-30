@@ -1,123 +1,86 @@
-import { useEffect, useState } from "react";
-import { ChevronDown, Sparkles } from "lucide-react";
-import SyntaxHighlighter from "react-syntax-highlighter";
-import { codeExamples, floatingCards } from "../data/CodeExamples";
-import { nightOwl } from "react-syntax-highlighter/dist/esm/styles/hljs";
+import { useState, useEffect } from 'react';
+import { ArrowRight, Play, Sparkles } from "lucide-react";
+import HeroImage from "../assets/images/hero-image.png";
+import HeroBadge from './additional-elements/HeroBadge';
 
 export default function Hero() {
-  const [mousePosition, setMousPosition] = useState({ x: 0, y: 0 });
-  const [activeTab, setActiveTab] = useState("App.jsx");
-  const currentFloatingCard = floatingCards[activeTab];
+
+  const [showBadge, setShowBadge] = useState(false);
+  const [textVisible, setTextVisible] = useState(false);
 
   useEffect(() => {
-    function handleMouseMove(e) {
-      setMousPosition({ x: e.clientX, y: e.clientY });
-    }
+    // 1. Trigger the Badge Shape to pop in
+    const timer1 = setTimeout(() => setShowBadge(true), 100);
+    
+    // 2. Trigger the Text/Icon to fade in cleanly afterwards
+    const timer2 = setTimeout(() => setTextVisible(true), 600);
 
-    window.addEventListener("mousemove", handleMouseMove);
-
-    return () => window.removeEventListener("mousemove", handleMouseMove);
+    return () => {
+      clearTimeout(timer1);
+      clearTimeout(timer2);
+    };
   }, []);
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center pt-16 sm:pt-20 px-4 sm:px-6 lg:px-8 overflow-hidden">
-      <div className="absolute inset-0 opacity-30" style={{
-        background: `radial-gradient(600px circle at ${mousePosition.x}px ${mousePosition.y}px, rgba(59, 130, 246, 0.15), transparent 40%)`,
-      }} />
+    <section className="relative min-h-[100dvh] flex items-center justify-center bg-slate-50 pt-16 pb-12 mb-8 lg:py-0 px-4 sm:px-6 lg:px-8"
+      style={{ 
+        overflowX: 'hidden', // Forces horizontal scroll to die
+        overflowY: 'clip',   // Modern fix for vertical overflow issues in animations
+        touchAction: 'pan-y' // Optimization for mobile scrolling
+      }}
+    >
+      {/* Background Glows */}
+      <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-blue-200/40 blur-[120px] rounded-full pointer-events-none" />
+      <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-indigo-200/40 blur-[120px] rounded-full pointer-events-none" />
 
-      <div className="absolute top-20 left-4 sm:left-10 w-48 sm:w-72 h-48 sm:h-72 bg-blue-500/10 rounded-full blur-3xl animate-pulse" />
-      <div className="absolute bottom-20 right-4 sm:right-10 w-64 sm:w-96 h-64 sm:h-96 bg-cyan-500/10 rounded-full blur-3xl animate-pulse delay-1000" />
+      <div className="max-w-7xl mx-auto relative w-full z-10">
+        <div className="flex flex-col lg:grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
 
-      <div className="max-w-7xl mx-auto text-center relative w-full">
-        <div className="max-w-7xl mx-auto flex flex-col lg:grid lg:grid-cols-2 gap-6 sm:gap-8 lg:gap-12 items-center relative">
-          <div>
-            <div className="inline-flex items-center space-x-2 px-3 sm:px-4 py-2 bg-blue-500/10 border border-blue-500/20 rounded-full mb-4 sm:mb-6 animate-in slide-in-from-bottom duration-700">
-              <Sparkles className="w-4 h-4 text-blue-400" />
-              <span className="text-xs sm:text-sm text-blue-300">Introducing Rosentte</span>
+          {/* LEFT SIDE: Content */}
+          <div className="animate-hero-slide-up text-center lg:text-left space-y-8">
+            <div className="inline-flex items-center space-x-2 px-4 py-2 bg-blue-600/5 border border-blue-600/10 rounded-full">
+              <Sparkles className="w-4 h-4 text-blue-600" />
+              <span className="text-xs sm:text-sm text-blue-700 font-semibold tracking-wide uppercase">AI-Powered Identity</span>
             </div>
 
-            <h1 className="text-5xl sm:text-3xl md:text-4xl lg:text-5xl font-semibold mb-4 sm:mb-6 animate-in slide-in-from-bottom duration-700 delay-100 leading-tight">
-              <span className="bg-gradient-to-r from-white via-blue-100 to-cyan-100 bg-clip-text text-transparent block mb-1 sm:mb-2">Code Faster</span>
-              <span className="bg-gradient-to-b from-blue-400 via-cyan-400 to-blue-400 bg-clip-text text-transparent block mb-1 sm:mb-2">Build Better</span>
-              <span className="bg-gradient-to-r from-white via-blue-100 to-cyan-100 bg-clip-text text-transparent block mb-1 sm:mb-2">With Rosentte</span>
+            <h1 className="text-5xl lg:text-7xl font-extrabold tracking-tight text-slate-900 leading-[1.1]">
+              Create Your Digital <br />
+              <span className="bg-gradient-to-r from-blue-600 via-indigo-600 to-blue-700 bg-clip-text text-transparent">Persona in Seconds</span>
             </h1>
-          </div>
-          <div className="relative order-2 w-full">
-            <div className="relative bg-white/5 backdrop-blur-xl rounded-xl sm:rounded-2xl p-3 sm:p-4 shadow-2xl border border-white/10">
-              <div className="bg-linear-to-br from-gray-900/20 to-gray-800/20 backdrop-blur-sm rounded-lg overflow-hidden h-[280px] sm:h-[350px] lg:h-[450px] border border-white/5">
-                {/* IDE Header */}
-                <div className="flex items-center justify-between px-3 sm:px-4 py-2 sm:py-3 bg-white/5 backdrop-blur-sm border-b border-white/10">
-                  <div className="flex items-center space-x-2">
-                    <div className="flex items-center space-x-1 sm:space-x-2">
-                      <div className="w-2 h-2 sm:w-3 sm:h-3 rounded-full bg-red-500" />
-                      <div className="w-2 h-2 sm:w-3 sm:h-3 rounded-full bg-yellow-500" />
-                      <div className="w-2 h-2 sm:w-3 sm:h-3 rounded-full bg-green-500" />
-                    </div>
-                    <span className="text-xs sm:text-sm text-gray-300">Rosentte AI Avatar Generator</span>
-                  </div>
-                  <ChevronDown className="w-3 h-3 sm:w-4 sm:h-4 text-gray-400" />
-                </div>
-                <div className="p-3 sm:p-4 relative h-full">
-                  {/* File Tabs */}
-                  <div className="flex space-x-1 sm:space-x-2 sm:mb-4 overflow-x-auto">
-                    <button
-                      onClick={() => setActiveTab("App.jsx")}
-                      className={`px-3 py-2 backdrop-blur-sm text-xs sm:text-sm rounded-t-lg border ${activeTab === "App.jsx"
-                        ? "bg-blue-500/30 text-white border-blue-400/20"
-                        : "bg-white/5 text-gray-300 border-white/10 hover:bg-white/10"
-                        } transition-all duration-200 whitespace-nowrap`}>App.jsx</button>
-                    <button
-                      onClick={() => setActiveTab("Hero.jsx")}
-                      className={`px-3 py-2 backdrop-blur-sm text-xs sm:text-sm rounded-t-lg border ${activeTab === "Hero.jsx"
-                        ? "bg-blue-500/30 text-white border-blue-400/20"
-                        : "bg-white/5 text-gray-300 border-white/10 hover:bg-white/10"
-                        } transition-all duration-200 whitespace-nowrap`}>Hero.jsx</button>
-                    <button
-                      onClick={() => setActiveTab("Navbar.jsx")}
-                      className={`px-3 py-2 backdrop-blur-sm text-xs sm:text-sm rounded-t-lg border ${activeTab === "Navbar.jsx"
-                        ? "bg-blue-500/30 text-white border-blue-400/20"
-                        : "bg-white/5 text-gray-300 border-white/10 hover:bg-white/10"
-                        } transition-all duration-200 whitespace-nowrap`}>Navbar.jsx</button>
-                  </div>
 
-                  {/* Code Content */}
-                  <div className="relative overflow-hidden flex-grow">
-                    <SyntaxHighlighter
-                      language="javascript"
-                      style={nightOwl}
-                      customStyle={{
-                        margin: 0,
-                        borderRadius: "8px",
-                        fontSize: "12px",
-                        lineHeight: "1.4",
-                        height: "100%",
-                        border: "1px solid #3c3c3c",
-                        wordWrap: "break-word",
-                        whiteSpace: "pre-wrap",
-                        textAlign: "left",
-                      }}
-                    >
-                      {codeExamples[activeTab]}
-                    </SyntaxHighlighter>
-                  </div>
+            <p className="text-lg text-slate-600 max-w-xl mx-auto lg:mx-0 leading-relaxed font-medium">
+              Unleash your creativity with our cutting-edge AI. Generate hyper-realistic or stylized, customizable avatars.
+            </p>
+
+            <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
+              <button className="px-8 py-4 bg-blue-600 rounded-lg font-bold text-white flex items-center justify-center gap-2 hover:bg-blue-700 shadow-xl shadow-blue-600/25 transition-all active:scale-95">
+                Start Creating <ArrowRight className="w-5 h-5" />
+              </button>
+              <button className="group px-8 py-4 bg-white border border-slate-200 rounded-lg font-bold text-slate-700 flex items-center justify-center gap-3 hover:bg-slate-50 transition-all shadow-sm">
+                <div className="p-2 bg-blue-50 rounded-full group-hover:bg-blue-100 transition-colors">
+                  <Play className="w-4 h-4 fill-blue-600 text-blue-600" />
                 </div>
-              </div>
-              {/* Floating Cards */}
-              <div
-                className={`hidden lg:block absolute bottom-4 right-4 transform translate-x-8 translate-y-8 w-72 ${currentFloatingCard.bgColor} backdrop-blur-xl rounded-lg p-4 border border-white/20 shadow-2xl`}
-              >
-                <div className="flex items-center space-x-2 mb-2">
-                  <div className={`w-6 h-6 ${currentFloatingCard.iconColor} flex items-center justify-center text-sm font-bold`}>{currentFloatingCard.icon}</div>
-                  <span className={`text-sm font-medium ${currentFloatingCard.textColor}`}>{currentFloatingCard.title}</span>
-                </div>
-                <div className={`text-sm text-left ${currentFloatingCard.contentColor}`}>
-                  {currentFloatingCard.content}
-                </div>
-              </div>
+                <span>Watch Demo</span>
+              </button>
             </div>
           </div>
+
+          {/* RIGHT SIDE: Animated Badge */}
+          <div className="relative w-full mt-24 lg:mt-0">
+            <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-[75%] z-30 flex justify-center w-full">
+
+              {/* The Pure SVG Badge */}
+              <HeroBadge show={showBadge} textVisible={textVisible} />
+            </div>
+
+            {/* MAIN IMAGE */}
+            <div className="animate-hero-slide-right relative z-10 rounded-[3rem] p-2 bg-white border border-slate-200 shadow-2xl">
+              <img src={HeroImage} alt="AI Avatar" className="w-full h-auto object-cover rounded-[2.5rem]" />
+            </div>
+          </div>
+
         </div>
       </div>
     </section>
-  )
+  );
 }
