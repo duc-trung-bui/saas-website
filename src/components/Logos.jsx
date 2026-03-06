@@ -8,7 +8,7 @@ const partners = [
   { name: "OpenAI", logo: "/openai.png" },
   { name: "Nvidia", logo: "https://upload.wikimedia.org/wikipedia/commons/2/21/Nvidia_logo.svg" },
   { name: "Conscience", logo: "/conscience.png" },
-  { name: "DeepSeek", logo: "https://chat.deepseek.com/favicon.svg" },
+  { name: "DeepSeek", logo: "/deepseek.png" },
   { name: "Google", logo: "https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_2015_logo.svg" },
 ];
 
