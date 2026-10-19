@@ -5,7 +5,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 gsap.registerPlugin(ScrollTrigger);
 
 const partners = [
-  { name: "OpenAI", logo: "/openai.png" },
+  { name: "OpenAI", logo: "/claude.png" },
   { name: "Nvidia", logo: "https://upload.wikimedia.org/wikipedia/commons/2/21/Nvidia_logo.svg" },
   { name: "Conscience", logo: "/conscience.png" },
   { name: "DeepSeek", logo: "/deepseek.png" },

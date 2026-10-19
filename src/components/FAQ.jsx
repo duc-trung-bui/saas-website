@@ -61,16 +61,16 @@ export default function FAQ() {
   }, []);
 
   return (
-    <section id="faq" className="pb-40 bg-slate-50">
+    <section id="faq" className="pb-40 px-6 lg:px-0 bg-slate-50">
       <div
         ref={containerRef}
-        className="max-w-[50%] mx-auto px-6 opacity-0 will-change-transform"
+        className="w-full max-w-[20rem] sm:max-w-[28rem] lg:max-w-[50%] mx-auto lg:px-6 opacity-0 will-change-transform"
       >
         <h2 className="text-3xl font-bold text-center bg-gradient-to-r from-blue-400 via-blue-600 to-blue-900 bg-clip-text text-transparent mb-12">
           Frequently Asked Questions
         </h2>
 
-        <div className="space-y-4">
+        <div className="space-y-6">
           {faqData.map((faq, index) => {
             const isOpen = openIndex === index;
 
@@ -81,7 +81,7 @@ export default function FAQ() {
                 onClick={() => toggleFAQ(index)}
               >
                 {/* Question Header */}
-                <div className="flex justify-between items-center py-4">
+                <div className="flex justify-between items-center pt-5 pb-8">
                   <h3 className={`text-lg md:text-xl transition-colors duration-200 ${isOpen ? 'text-slate-900 font-semibold' : 'text-slate-800 font-medium'}`}>
                     {faq.question}
                   </h3>
@@ -103,9 +103,16 @@ export default function FAQ() {
                     }`}
                 >
                   <div className="overflow-hidden">
-                    <p className="text-slate-700 text-md leading-relaxed pb-6 pr-12">
+                    <p className="text-slate-700 text-md leading-relaxed pb-8 pr-12">
                       {faq.answer}
                     </p>
+                  </div>
+                </div>
+
+                {/* Divider: three nested borders so every line snaps to whole device pixels */}
+                <div className="w-full border-t border-white">
+                  <div className="w-full border-t border-indigo-100/50">
+                    <div className="w-full border-t border-slate-50/10" />
                   </div>
                 </div>
               </div>

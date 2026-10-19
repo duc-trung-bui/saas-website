@@ -52,7 +52,7 @@ export default function Navbar({ scrolled }) {
             className="md:hidden p-2 text-slate-800 hover:text-blue-600 transition-colors"
             onClick={() => setMobileMenuIsOpen((prev) => !prev)}
           >
-            <Menu className="w-6 h-6" />
+            {mobileMenuIsOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
           </button>
         </div>
       </div>
@@ -61,15 +61,6 @@ export default function Navbar({ scrolled }) {
       {mobileMenuIsOpen && (
         <div className="md:hidden bg-white border-t border-slate-100 shadow-xl animate-in slide-in-from-top duration-300">
           <div className="px-4 py-6">
-            {/* Close button inside sidebar */}
-            <div className="flex justify-end mb-4">
-              <button
-                className="p-2 text-slate-800 hover:text-blue-600 transition-colors"
-                onClick={() => setMobileMenuIsOpen(false)}
-              >
-                <X className="w-6 h-6" />
-              </button>
-            </div>
             {/* 1. Centered Nav Links */}
             <div className="flex flex-col items-center space-y-6">
               <a
