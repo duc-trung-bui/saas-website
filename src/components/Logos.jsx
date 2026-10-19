@@ -1,4 +1,4 @@
-import React, { useLayoutEffect, useRef } from 'react';
+import React, { useLayoutEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
@@ -16,6 +16,26 @@ export default function Logos() {
   const sectionRef = useRef(null);
   const sliderRef = useRef(null);
   const animationRef = useRef(null);
+  const [activeIndex, setActiveIndex] = useState(null);
+
+  // Touch has no hover, so a finger press pauses the marquee and colors the pressed logo.
+  // Release is listened for on window so a missed pointerup/cancel can't leave a logo stuck colored.
+  const pressLogo = (e, index) => {
+    if (e.pointerType === 'mouse') return;
+    animationRef.current?.pause();
+    setActiveIndex(index);
+
+    const release = () => {
+      animationRef.current?.play();
+      setActiveIndex(null);
+      ['pointerup', 'pointercancel', 'touchend', 'touchcancel'].forEach(t =>
+        window.removeEventListener(t, release, true));
+      window.removeEventListener('scroll', release, true);
+    };
+    ['pointerup', 'pointercancel', 'touchend', 'touchcancel'].forEach(t =>
+      window.addEventListener(t, release, true));
+    window.addEventListener('scroll', release, true);
+  };
 
   useLayoutEffect(() => {
     const slider = sliderRef.current;
@@ -85,18 +105,20 @@ export default function Logos() {
         <div
           ref={sliderRef}
           className="flex w-max items-center whitespace-nowrap will-change-transform"
-          onMouseEnter={() => animationRef.current?.pause()}
-          onMouseLeave={() => animationRef.current?.play()}
+          onPointerEnter={(e) => { if (e.pointerType === 'mouse') animationRef.current?.pause(); }}
+          onPointerLeave={(e) => { if (e.pointerType === 'mouse') animationRef.current?.play(); }}
         >
           {[...partners, ...partners].map((partner, index) => (
             <div
               key={index}
+              onPointerDown={(e) => pressLogo(e, index)}
               className="flex shrink-0 items-center justify-center px-12 lg:px-16 h-10 lg:h-12"
             >
               <img
                 src={partner.logo}
                 alt={partner.name}
-                className="h-full w-auto object-contain grayscale opacity-60 hover:grayscale-0 hover:opacity-100 transition-all duration-300"
+                data-active={activeIndex === index}
+                className="h-full w-auto object-contain grayscale opacity-60 hover:grayscale-0 hover:opacity-100 data-[active=true]:grayscale-0 data-[active=true]:opacity-100 transition-all duration-300"
               />
             </div>
           ))}
