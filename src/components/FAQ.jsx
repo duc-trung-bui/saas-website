@@ -110,9 +110,9 @@ export default function FAQ() {
                 </div>
 
                 {/* Divider: three nested borders so every line snaps to whole device pixels */}
-                <div className="w-full border-t border-white">
-                  <div className="w-full border-t border-indigo-100/50">
-                    <div className="w-full border-t border-slate-50/10" />
+                <div className="w-full border-t border-slate-50/30">
+                  <div className="w-full border-t border-slate-200/50">
+                    <div className="w-full border-t border-slate-50/30" />
                   </div>
                 </div>
               </div>
